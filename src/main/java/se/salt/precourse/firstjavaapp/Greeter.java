@@ -8,13 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 public class Greeter {
   protected static String greet(String namePassedIn) {
-    return "Welcome to SALT, " + namePassedIn;
-  }
-
-  protected static String days(String datePassedIn) {
-    LocalDate strToDate = LocalDate.parse(datePassedIn);
-    long daysCount = ChronoUnit.DAYS.between(LocalDate.now(), strToDate);
-    return "Today it is " + daysCount + " days left until the course starts";
+    return "Welcome to SALT, " + namePassedIn + "!";
   }
 
   public static void main(String[] args) throws IOException {
@@ -23,15 +17,19 @@ public class Greeter {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String name = reader.readLine();
 
-    System.out.print("When does that course start? ");
-    String date = reader.readLine();
-
-    reader.close();
-
     String greeting = greet(name);
-    String daysOfCourse = days(date);
-
     System.out.println(greeting);
-    System.out.println(daysOfCourse);
+
+    System.out.print("When does your course start (yyyy-mm-dd)? ");
+    String startDateInput = reader.readLine();
+    reader.close();
+    System.out.println("Start date: " + startDateInput);
+
+    StartDateHandler startDateHandler = new StartDateHandler();
+    if(startDateHandler.dateHasOnlyNumbers(startDateInput) ){
+      System.out.println(" You start in " + startDateHandler.daysToCourseStart(startDateInput) + " days. Better get cracking on that Pre-course!");
+    } else {
+      System.out.println("Please provide a valid date next time!");
+    }
   }
 }

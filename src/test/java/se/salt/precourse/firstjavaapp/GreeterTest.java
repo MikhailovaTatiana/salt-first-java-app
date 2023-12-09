@@ -13,12 +13,4 @@ class GreeterTest {
         String result = Greeter.greet("Tatiana");
         assertEquals(result, "Welcome to SALT, Tatiana");
     }
-
-    @Test
-    void daysTest() {
-        LocalDate today = LocalDate.now();
-        LocalDate futureDay = today.plusDays(10);
-        String messege = Greeter.days(futureDay.toString());
-        assertEquals( "Today it is 10 days left until the course starts", messege);
-    }
 }
